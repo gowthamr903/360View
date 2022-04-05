@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>360 Viewer</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://naver.github.io/egjs-view360/common/css/PanoControls.css" rel="stylesheet">
+
+    <style>
+
+.icon {
+    background: #70B5E0;
+    border-radius: 50%;
+    box-shadow: inset -15px -15px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.anchor {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #f77;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: anchor 10s both infinite;
+}
+
+.place {
+    position: absolute;
+    width: 20px;
+    height: 13px;
+    background: #F2DDAA;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .anchor:before {
+    position: absolute;
+    content: "";
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-top: 13px solid #f77;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.anchor:after {
+    position: absolute;
+    content: "";
+    width: 30%;
+    height: 30%;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.place1 {
+    top: 77%;
+    left: 64%;
+}
+
+.place2 {
+    width: 17px;
+    height: 10px;
+    top: 67%;
+    left: 25%;
+}
+
+.place3 {
+    width: 17px;
+    height: 10px;
+    top: 36%;
+    left: 75%;
+}
+
+.place4 {
+    width: 17px;
+    height: 10px;
+    top: 26%;
+    left: 35%;
+}
+
+.anchor1 {
+    top: 55%;
+    left: 65%;
+    animation-delay: 0.3s;
+}
+
+.anchor2 {
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%) scale(0.8);
+    animation-delay: 0.6s;
+}
+
+.anchor3 {
+    top: 20%;
+    left: 75%;
+    transform: translate(-50%, -50%) scale(0.8);
+    animation-delay: 0.9s;
+}
+
+.anchor4 {
+    top: 10%;
+    left: 35%;
+    transform: translate(-50%, -50%) scale(0.7);
+    animation-delay: 1.2s;
+}
+
+@keyframes anchor {
+    0% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+
+    10% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    85% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    91% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+}
+.hotspot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+
+.hotspot.search {
+    width: 24px;
+    height: 24px;
+    /* border: 1px solid #fff; */
+}
+
+/* .hotspot.search:before {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 12px;
+    top: 0px;
+    left: 0px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+
+.hotspot.search:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    left: 14px;
+    width: 3px;
+    height: 8px;
+    background: #fff;
+    transform-origin: 50% 0%;
+    transform: rotate(-45deg);
+} */
+
+.hotspot.link {
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.viewer[data-page="1"] .hotspot[data-page="1"] {
+    display: block;
+}
+
+.viewer[data-page="2"] .hotspot[data-page="2"] {
+    display: block;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    display: none;
+}
+
+.layer img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.marker img{
+    z-index: 999999;
+}
+
+.marker {
+    cursor: pointer;
+}
+
+
+.row1{
+    position: relative;
+    z-index: 999999999;
+    width: 400px;
+    display: inline-flex;
+    margin: 10px 1px;
+}
+.boxborder{
+    color: white;
+    width: 200px;
+    background: black;
+    padding: 15px;
+    font-size: 21px;
+    margin: 1px;
+}
+.img{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.row_bottom{
+    position: absolute;
+    bottom: 48px;
+/*    
+    border: 3px solid #8AC007; */
+    z-index: 999999999;
+    display: inline-flex;
+  cursor: pointer;
+}
+    
+    </style>
+</head>
+<body>
+
+
+   
+
+  
+
+<div class="viewer" data-page="1">
+
+    <div class="row1">
+
+        <div class="boxborder" style="background:#a36a00;" onclick="ChangeView('interior')">
+           View  Interior
+        </div>
+        
+        <div class="boxborder" onclick="ChangeView('exterior')">
+           View  Exterior
+        </div>
+    </div>
+
+    <div class="row_bottom" id="interior_menu" style="display: none;">
+
+        <div class="boxborder" style="background: #005d49;color:white;width: 106px;" onclick="ChangeExteriorView('front')">
+          Front
+        </div>
+        
+        <div class="boxborder" style=" width: 106px;background: #005d49;color:white;" onclick="ChangeExteriorView('back')">
+          Back
+        </div>
+        <div class="boxborder" style=" width: 106px;background: #005d49;color:white" onclick="ChangeExteriorView('side')">
+            Side
+          </div>
+    </div>
+
+    <div class="container"></div>
+    <div class="layer" onclick="closeLayer(event);">
+        <img src="https://naver.github.io/egjs-view360/examples/panoviewer/etc/img/book1.jpg">
+    </div>
+
+
+    <div class="hotspot marker"  data-view="front" id="front"  data-page="1" data-anchor-index="0" data-yaw="10" data-pitch="-35" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+    
+   
+    <div class="hotspot marker"  data-view="front_left_side" id="front_left_side"  data-page="1" data-anchor-index="0" data-yaw="42" data-pitch="-18" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+
+    <div class="hotspot marker"  data-view="left_side" id="left_side"  data-page="1" data-anchor-index="0" data-yaw="40" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+
+    <div class="hotspot marker"  data-view="back_left_side" id="back_left_side"  data-page="1" data-anchor-index="0" data-yaw="40" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+
+    <div class="hotspot marker"  data-view="back" id="back"  data-page="1" data-anchor-index="0" data-yaw="40" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+   
+    <div class="hotspot marker"  data-view="back_right_side" id="back_right_side"  data-page="1" data-anchor-index="0" data-yaw="40" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+
+    <div class="hotspot marker"  data-view="right_side" id="right_side"  data-page="1" data-anchor-index="0" data-yaw="40" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+
+    <div class="hotspot marker"  data-view="front_right_side" id="front_right_side"  data-page="1" data-anchor-index="0" data-yaw="-25" data-pitch="-20" style="display: none;">
+        <img src="images/marker.webp" width="150">
+    </div>
+   
+   
+    <div class="hotspot link" id="banet" data-page="1" data-anchor-index="3" data-yaw="5" data-pitch="-5" onclick="LoadAction(this, 'frontbanet')"  style="display: none;">
+        Open Banet
+    </div>
+
+    <div class="hotspot link" id="leftdoor" data-page="1" data-anchor-index="3" data-yaw="5" data-pitch="-5" onclick="LoadAction(this, 'leftdoor')"  style="display: none;">
+        Open Door
+    </div>
+
+    <div class="hotspot link" id="backdoor" data-page="1" data-anchor-index="3" data-yaw="5" data-pitch="-5" onclick="LoadAction(this, 'backdoor')"  style="display: none;">
+        Open Door
+    </div>
+
+    <div class="hotspot link" id="rightdoor" data-page="1" data-anchor-index="3" data-yaw="5" data-pitch="-5" onclick="LoadAction(this, 'rightdoor')"  style="display: none;">
+        Open Door
+    </div>
+    
+</div>
+
+
+
+
+<script src="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
+<!-- <script src="https://naver.github.io/egjs-view360/common/js/qrcode.js"></script> -->
+
+<script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
+<script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
+<script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>    
+
+<script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>      
+<script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>  
+<script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>        
+
+
+
+<script src="js/main.js"></script>
+
+    
+</body>
+</html>
