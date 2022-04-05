@@ -93,7 +93,7 @@ function load(target, page) {
     
 }
 var viewer = new eg.view360.PanoViewer(container, {
-    image: "images/front.JPG",
+    image: "https://gowthamr903.github.io/360View/images/front.JPG",
     projectionType: eg.view360.PanoViewer.PROJECTION_TYPE.EQUIRECTANGULAR,
     yawRange: [-70,80], // horizontal FOV by degree is 270.
     pitchRange: [-55, 55], // vertical FOV by degree is 70.
